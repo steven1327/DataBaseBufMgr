@@ -10,7 +10,11 @@ public class BufMgr {
 	private int numBuff;
 	private int lookAheadSize;
 	private String replacementPolicy;
-	private Queue<Integer> availFrame;
+	private Queue<Integer> emptyFrame;
+	private Queue<Integer> flushFrame;
+	private HashTable<Integer,Integer> directory;
+	//Lirs contains a vector value, value[0] = RD, value[1] = R
+	private Hashtable<Integer,Vector<Integer>> Lirs;
 
 	public BufMgr(int numbufs, int lookAheadSize, String replacementPolicy){
 		this.lookAheadSize = lookAheadSize;
