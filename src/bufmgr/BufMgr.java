@@ -5,10 +5,21 @@ import global.Page;
 import global.PageId;
 
 public class BufMgr {
+	private Page[] buffPool;
+	private discriptor[] discriptors;
+	private int numBuff;
+	private int lookAheadSize;
+	private String replacementPolicy;
+	private Queue<Integer> availFrame;
 
-
-	public BufMgr(int numbufs, int lookAheadSize, String replacementPolicy) {
-
+	public BufMgr(int numbufs, int lookAheadSize, String replacementPolicy){
+		this.lookAheadSize = lookAheadSize;
+		numBuff = numbufs;
+		buffPool = new Page[numbufs];
+		this.replacementPolicy = replacementPolicy;
+		for(int i = 0;i < numbufs;i++){
+			availFrame.add(i);
+		}
 	}
 
 	public void pinPage(PageId pageno, Page page, boolean emptyPage) throws BufferPoolExceededException{
